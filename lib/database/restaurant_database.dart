@@ -21,6 +21,7 @@ part 'restaurant_database.g.dart';
     RestaurantTables,
     Orders,
     OrderItems,
+    Customers,
     SyncQueue,
   ],
 )
@@ -31,14 +32,18 @@ class RestaurantDatabase extends _$RestaurantDatabase {
     : super(_openRestaurantConnection(restaurantId));
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) async {
       await m.createAll();
     },
-    onUpgrade: (m, from, to) async {},
+    onUpgrade: (m, from, to) async {
+      if (from < 2) {
+        await m.createTable(customers);
+      }
+    },
   );
 
   // ─── Users ────────────────────────────────────────────────────────────────
@@ -347,6 +352,32 @@ class RestaurantDatabase extends _$RestaurantDatabase {
           ..where((m) => m.ingredientId.equals(ingredientId))
           ..orderBy([(m) => OrderingTerm.desc(m.createdAt)]))
         .get();
+  }
+
+  // ─── Sync Queue ───────────────────────────────────────────────────────────
+
+  // ─── Customers ────────────────────────────────────────────────────────────
+
+  Stream<List<Customer>> watchAllCustomers() {
+    return (select(customers)
+          ..where((c) => c.restaurantId.equals(restaurantId))
+          ..orderBy([(c) => OrderingTerm.asc(c.name)]))
+        .watch();
+  }
+
+  Future<List<Customer>> getAllCustomers() {
+    return (select(customers)
+          ..where((c) => c.restaurantId.equals(restaurantId))
+          ..orderBy([(c) => OrderingTerm.asc(c.name)]))
+        .get();
+  }
+
+  Future<void> upsertCustomer(CustomersCompanion customer) async {
+    await into(customers).insertOnConflictUpdate(customer);
+  }
+
+  Future<void> deleteCustomer(String id) async {
+    await (delete(customers)..where((c) => c.id.equals(id))).go();
   }
 
   // ─── Sync Queue ───────────────────────────────────────────────────────────

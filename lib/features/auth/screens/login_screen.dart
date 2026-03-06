@@ -85,42 +85,95 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final authState = ref.watch(authProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.surfaceColor,
+      backgroundColor: const Color(0xFFF8F9FC),
       body: Row(
         children: [
           // ── Left Panel ─────────────────────────────────────────────────
           Expanded(
-            flex: 2,
+            flex: 5,
             child: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [AppTheme.sidebarColor, AppTheme.primaryColor],
+                  colors: [Color(0xFF1E1B4B), Color(0xFF5C35CC)],
                 ),
               ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Stack(
                 children: [
-                  Icon(Icons.restaurant, color: Colors.white, size: 80),
-                  SizedBox(height: 24),
-                  Text(
-                    'RMS Offline',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
+                  // Decorative circles
+                  Positioned(
+                    top: -60,
+                    left: -60,
+                    child: Container(
+                      width: 220,
+                      height: 220,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white.withValues(alpha: 0.05),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 12),
-                  Text(
-                    'Restaurant Management System',
-                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  Positioned(
+                    bottom: -40,
+                    right: -40,
+                    child: Container(
+                      width: 180,
+                      height: 180,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white.withValues(alpha: 0.05),
+                      ),
+                    ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Offline-First • Multi-Tenant',
-                    style: TextStyle(color: Colors.white54, fontSize: 13),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Icon(
+                            Icons.restaurant_menu_rounded,
+                            color: Colors.white,
+                            size: 44,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        const Text(
+                          'RMS Offline',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 34,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: -0.5,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Text(
+                            'Restaurant Management System',
+                            style: TextStyle(color: Colors.white70, fontSize: 13),
+                          ),
+                        ),
+                        const SizedBox(height: 48),
+                        // Feature bullets
+                        _FeatureBullet(Icons.wifi_off_rounded, 'Offline-First — works without internet'),
+                        const SizedBox(height: 10),
+                        _FeatureBullet(Icons.store_rounded, 'Multi-Tenant — manage multiple restaurants'),
+                        const SizedBox(height: 10),
+                        _FeatureBullet(Icons.sync_rounded, 'Auto-Sync — syncs when online'),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -128,142 +181,152 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           ),
           // ── Right Panel (Login Form) ────────────────────────────────────
           Expanded(
-            flex: 3,
+            flex: 6,
             child: Center(
               child: Container(
-                width: 420,
+                width: 440,
                 padding: const EdgeInsets.all(40),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.06),
+                      blurRadius: 24,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(
+                      const Text(
                         'Welcome Back',
-                        style: Theme.of(context).textTheme.headlineLarge,
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF111827),
+                        ),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Sign in to continue',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                      const SizedBox(height: 6),
+                      const Text(
+                        'Sign in to your account to continue',
+                        style: TextStyle(color: Color(0xFF6B7280), fontSize: 13),
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 28),
                       // Login type toggle
                       Container(
+                        padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(8),
+                          color: const Color(0xFFF3F4F6),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
                           children: [
-                            _buildToggleBtn(
-                              'Platform Admin',
-                              _isPlatformAdmin,
-                              () {
-                                setState(() => _isPlatformAdmin = true);
-                              },
-                            ),
-                            _buildToggleBtn(
-                              'Restaurant',
-                              !_isPlatformAdmin,
-                              () {
-                                setState(() => _isPlatformAdmin = false);
-                              },
-                            ),
+                            _buildToggleBtn('Platform Admin', _isPlatformAdmin,
+                                () => setState(() => _isPlatformAdmin = true)),
+                            _buildToggleBtn('Restaurant', !_isPlatformAdmin,
+                                () => setState(() => _isPlatformAdmin = false)),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 20),
                       // Restaurant selector
                       if (!_isPlatformAdmin) ...[
                         DropdownButtonFormField<String>(
-                          initialValue: _selectedRestaurantId,
+                          value: _selectedRestaurantId,
                           decoration: const InputDecoration(
                             labelText: 'Select Restaurant',
-                            prefixIcon: Icon(Icons.restaurant),
+                            prefixIcon: Icon(Icons.store_outlined, size: 18),
                           ),
                           items: _restaurants
-                              .map(
-                                (r) => DropdownMenuItem(
-                                  value: r.id,
-                                  child: Text(r.name),
-                                ),
-                              )
+                              .map((r) => DropdownMenuItem(
+                                    value: r.id,
+                                    child: Text(r.name),
+                                  ))
                               .toList(),
-                          onChanged: (v) =>
-                              setState(() => _selectedRestaurantId = v),
-                          validator: (v) => v == null && !_isPlatformAdmin
-                              ? 'Select a restaurant'
-                              : null,
+                          onChanged: (v) => setState(() => _selectedRestaurantId = v),
+                          validator: (v) =>
+                              v == null && !_isPlatformAdmin ? 'Select a restaurant' : null,
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 14),
                       ],
                       // Email
                       TextFormField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
-                          labelText: 'Email',
-                          prefixIcon: Icon(Icons.email_outlined),
+                          labelText: 'Email address',
+                          prefixIcon: Icon(Icons.email_outlined, size: 18),
                         ),
-                        validator: (v) => v == null || !v.contains('@')
-                            ? 'Enter a valid email'
-                            : null,
+                        validator: (v) =>
+                            v == null || !v.contains('@') ? 'Enter a valid email' : null,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 14),
                       // Password
                       TextFormField(
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          prefixIcon: const Icon(Icons.lock_outline),
+                          prefixIcon: const Icon(Icons.lock_outline_rounded, size: 18),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _obscurePassword
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+                              _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                              size: 18,
                             ),
-                            onPressed: () => setState(
-                              () => _obscurePassword = !_obscurePassword,
-                            ),
+                            onPressed: () =>
+                                setState(() => _obscurePassword = !_obscurePassword),
                           ),
                         ),
                         validator: (v) =>
                             v == null || v.length < 4 ? 'Enter password' : null,
+                        onFieldSubmitted: (_) => authState.isLoading ? null : _login(),
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 28),
                       // Login button
-                      ElevatedButton(
-                        onPressed: authState.isLoading ? null : _login,
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                      SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: authState.isLoading ? null : _login,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF5C35CC),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
                           ),
+                          child: authState.isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 2, color: Colors.white),
+                                )
+                              : const Text('Sign In',
+                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
                         ),
-                        child: authState.isLoading
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : const Text(
-                                'Sign In',
-                                style: TextStyle(fontSize: 16),
-                              ),
                       ),
-                      const SizedBox(height: 16),
-                      Center(
-                        child: Text(
-                          'Default admin: admin@rms.com / admin123',
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF0EDFF),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.info_outline_rounded, size: 15, color: Color(0xFF5C35CC)),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Default admin: admin@rms.com / admin123',
+                                style: TextStyle(
+                                    fontSize: 11, color: Color(0xFF5C35CC)),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -285,20 +348,38 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: selected ? AppTheme.primaryColor : Colors.transparent,
+            color: selected ? const Color(0xFF5C35CC) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
             label,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: selected ? Colors.white : Colors.grey.shade700,
+              color: selected ? Colors.white : const Color(0xFF6B7280),
               fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
               fontSize: 13,
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _FeatureBullet extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  const _FeatureBullet(this.icon, this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: Colors.white60, size: 16),
+        const SizedBox(width: 8),
+        Text(text, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+      ],
     );
   }
 }

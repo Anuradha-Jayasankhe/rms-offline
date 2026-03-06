@@ -5787,6 +5787,714 @@ class OrderItemsCompanion extends UpdateCompanion<OrderItem> {
   }
 }
 
+class $CustomersTable extends Customers
+    with TableInfo<$CustomersTable, Customer> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CustomersTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _restaurantIdMeta = const VerificationMeta(
+    'restaurantId',
+  );
+  @override
+  late final GeneratedColumn<String> restaurantId = GeneratedColumn<String>(
+    'restaurant_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _emailMeta = const VerificationMeta('email');
+  @override
+  late final GeneratedColumn<String> email = GeneratedColumn<String>(
+    'email',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _phoneMeta = const VerificationMeta('phone');
+  @override
+  late final GeneratedColumn<String> phone = GeneratedColumn<String>(
+    'phone',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _totalSpentMeta = const VerificationMeta(
+    'totalSpent',
+  );
+  @override
+  late final GeneratedColumn<double> totalSpent = GeneratedColumn<double>(
+    'total_spent',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _totalOrdersMeta = const VerificationMeta(
+    'totalOrders',
+  );
+  @override
+  late final GeneratedColumn<int> totalOrders = GeneratedColumn<int>(
+    'total_orders',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _loyaltyPointsMeta = const VerificationMeta(
+    'loyaltyPoints',
+  );
+  @override
+  late final GeneratedColumn<int> loyaltyPoints = GeneratedColumn<int>(
+    'loyalty_points',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _lastVisitMeta = const VerificationMeta(
+    'lastVisit',
+  );
+  @override
+  late final GeneratedColumn<DateTime> lastVisit = GeneratedColumn<DateTime>(
+    'last_visit',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _syncStatusMeta = const VerificationMeta(
+    'syncStatus',
+  );
+  @override
+  late final GeneratedColumn<int> syncStatus = GeneratedColumn<int>(
+    'sync_status',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    restaurantId,
+    name,
+    email,
+    phone,
+    totalSpent,
+    totalOrders,
+    loyaltyPoints,
+    lastVisit,
+    syncStatus,
+    createdAt,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'customers';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<Customer> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('restaurant_id')) {
+      context.handle(
+        _restaurantIdMeta,
+        restaurantId.isAcceptableOrUnknown(
+          data['restaurant_id']!,
+          _restaurantIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_restaurantIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('email')) {
+      context.handle(
+        _emailMeta,
+        email.isAcceptableOrUnknown(data['email']!, _emailMeta),
+      );
+    }
+    if (data.containsKey('phone')) {
+      context.handle(
+        _phoneMeta,
+        phone.isAcceptableOrUnknown(data['phone']!, _phoneMeta),
+      );
+    }
+    if (data.containsKey('total_spent')) {
+      context.handle(
+        _totalSpentMeta,
+        totalSpent.isAcceptableOrUnknown(data['total_spent']!, _totalSpentMeta),
+      );
+    }
+    if (data.containsKey('total_orders')) {
+      context.handle(
+        _totalOrdersMeta,
+        totalOrders.isAcceptableOrUnknown(
+          data['total_orders']!,
+          _totalOrdersMeta,
+        ),
+      );
+    }
+    if (data.containsKey('loyalty_points')) {
+      context.handle(
+        _loyaltyPointsMeta,
+        loyaltyPoints.isAcceptableOrUnknown(
+          data['loyalty_points']!,
+          _loyaltyPointsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('last_visit')) {
+      context.handle(
+        _lastVisitMeta,
+        lastVisit.isAcceptableOrUnknown(data['last_visit']!, _lastVisitMeta),
+      );
+    }
+    if (data.containsKey('sync_status')) {
+      context.handle(
+        _syncStatusMeta,
+        syncStatus.isAcceptableOrUnknown(data['sync_status']!, _syncStatusMeta),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Customer map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Customer(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      restaurantId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}restaurant_id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      email: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}email'],
+      ),
+      phone: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}phone'],
+      ),
+      totalSpent: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}total_spent'],
+      )!,
+      totalOrders: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}total_orders'],
+      )!,
+      loyaltyPoints: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}loyalty_points'],
+      )!,
+      lastVisit: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_visit'],
+      ),
+      syncStatus: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sync_status'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $CustomersTable createAlias(String alias) {
+    return $CustomersTable(attachedDatabase, alias);
+  }
+}
+
+class Customer extends DataClass implements Insertable<Customer> {
+  final String id;
+  final String restaurantId;
+  final String name;
+  final String? email;
+  final String? phone;
+  final double totalSpent;
+  final int totalOrders;
+  final int loyaltyPoints;
+  final DateTime? lastVisit;
+  final int syncStatus;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  const Customer({
+    required this.id,
+    required this.restaurantId,
+    required this.name,
+    this.email,
+    this.phone,
+    required this.totalSpent,
+    required this.totalOrders,
+    required this.loyaltyPoints,
+    this.lastVisit,
+    required this.syncStatus,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['restaurant_id'] = Variable<String>(restaurantId);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || email != null) {
+      map['email'] = Variable<String>(email);
+    }
+    if (!nullToAbsent || phone != null) {
+      map['phone'] = Variable<String>(phone);
+    }
+    map['total_spent'] = Variable<double>(totalSpent);
+    map['total_orders'] = Variable<int>(totalOrders);
+    map['loyalty_points'] = Variable<int>(loyaltyPoints);
+    if (!nullToAbsent || lastVisit != null) {
+      map['last_visit'] = Variable<DateTime>(lastVisit);
+    }
+    map['sync_status'] = Variable<int>(syncStatus);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  CustomersCompanion toCompanion(bool nullToAbsent) {
+    return CustomersCompanion(
+      id: Value(id),
+      restaurantId: Value(restaurantId),
+      name: Value(name),
+      email: email == null && nullToAbsent
+          ? const Value.absent()
+          : Value(email),
+      phone: phone == null && nullToAbsent
+          ? const Value.absent()
+          : Value(phone),
+      totalSpent: Value(totalSpent),
+      totalOrders: Value(totalOrders),
+      loyaltyPoints: Value(loyaltyPoints),
+      lastVisit: lastVisit == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastVisit),
+      syncStatus: Value(syncStatus),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory Customer.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return Customer(
+      id: serializer.fromJson<String>(json['id']),
+      restaurantId: serializer.fromJson<String>(json['restaurantId']),
+      name: serializer.fromJson<String>(json['name']),
+      email: serializer.fromJson<String?>(json['email']),
+      phone: serializer.fromJson<String?>(json['phone']),
+      totalSpent: serializer.fromJson<double>(json['totalSpent']),
+      totalOrders: serializer.fromJson<int>(json['totalOrders']),
+      loyaltyPoints: serializer.fromJson<int>(json['loyaltyPoints']),
+      lastVisit: serializer.fromJson<DateTime?>(json['lastVisit']),
+      syncStatus: serializer.fromJson<int>(json['syncStatus']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'restaurantId': serializer.toJson<String>(restaurantId),
+      'name': serializer.toJson<String>(name),
+      'email': serializer.toJson<String?>(email),
+      'phone': serializer.toJson<String?>(phone),
+      'totalSpent': serializer.toJson<double>(totalSpent),
+      'totalOrders': serializer.toJson<int>(totalOrders),
+      'loyaltyPoints': serializer.toJson<int>(loyaltyPoints),
+      'lastVisit': serializer.toJson<DateTime?>(lastVisit),
+      'syncStatus': serializer.toJson<int>(syncStatus),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  Customer copyWith({
+    String? id,
+    String? restaurantId,
+    String? name,
+    Value<String?> email = const Value.absent(),
+    Value<String?> phone = const Value.absent(),
+    double? totalSpent,
+    int? totalOrders,
+    int? loyaltyPoints,
+    Value<DateTime?> lastVisit = const Value.absent(),
+    int? syncStatus,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => Customer(
+    id: id ?? this.id,
+    restaurantId: restaurantId ?? this.restaurantId,
+    name: name ?? this.name,
+    email: email.present ? email.value : this.email,
+    phone: phone.present ? phone.value : this.phone,
+    totalSpent: totalSpent ?? this.totalSpent,
+    totalOrders: totalOrders ?? this.totalOrders,
+    loyaltyPoints: loyaltyPoints ?? this.loyaltyPoints,
+    lastVisit: lastVisit.present ? lastVisit.value : this.lastVisit,
+    syncStatus: syncStatus ?? this.syncStatus,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  Customer copyWithCompanion(CustomersCompanion data) {
+    return Customer(
+      id: data.id.present ? data.id.value : this.id,
+      restaurantId: data.restaurantId.present
+          ? data.restaurantId.value
+          : this.restaurantId,
+      name: data.name.present ? data.name.value : this.name,
+      email: data.email.present ? data.email.value : this.email,
+      phone: data.phone.present ? data.phone.value : this.phone,
+      totalSpent: data.totalSpent.present
+          ? data.totalSpent.value
+          : this.totalSpent,
+      totalOrders: data.totalOrders.present
+          ? data.totalOrders.value
+          : this.totalOrders,
+      loyaltyPoints: data.loyaltyPoints.present
+          ? data.loyaltyPoints.value
+          : this.loyaltyPoints,
+      lastVisit: data.lastVisit.present ? data.lastVisit.value : this.lastVisit,
+      syncStatus: data.syncStatus.present
+          ? data.syncStatus.value
+          : this.syncStatus,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('Customer(')
+          ..write('id: $id, ')
+          ..write('restaurantId: $restaurantId, ')
+          ..write('name: $name, ')
+          ..write('email: $email, ')
+          ..write('phone: $phone, ')
+          ..write('totalSpent: $totalSpent, ')
+          ..write('totalOrders: $totalOrders, ')
+          ..write('loyaltyPoints: $loyaltyPoints, ')
+          ..write('lastVisit: $lastVisit, ')
+          ..write('syncStatus: $syncStatus, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    restaurantId,
+    name,
+    email,
+    phone,
+    totalSpent,
+    totalOrders,
+    loyaltyPoints,
+    lastVisit,
+    syncStatus,
+    createdAt,
+    updatedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Customer &&
+          other.id == this.id &&
+          other.restaurantId == this.restaurantId &&
+          other.name == this.name &&
+          other.email == this.email &&
+          other.phone == this.phone &&
+          other.totalSpent == this.totalSpent &&
+          other.totalOrders == this.totalOrders &&
+          other.loyaltyPoints == this.loyaltyPoints &&
+          other.lastVisit == this.lastVisit &&
+          other.syncStatus == this.syncStatus &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt);
+}
+
+class CustomersCompanion extends UpdateCompanion<Customer> {
+  final Value<String> id;
+  final Value<String> restaurantId;
+  final Value<String> name;
+  final Value<String?> email;
+  final Value<String?> phone;
+  final Value<double> totalSpent;
+  final Value<int> totalOrders;
+  final Value<int> loyaltyPoints;
+  final Value<DateTime?> lastVisit;
+  final Value<int> syncStatus;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const CustomersCompanion({
+    this.id = const Value.absent(),
+    this.restaurantId = const Value.absent(),
+    this.name = const Value.absent(),
+    this.email = const Value.absent(),
+    this.phone = const Value.absent(),
+    this.totalSpent = const Value.absent(),
+    this.totalOrders = const Value.absent(),
+    this.loyaltyPoints = const Value.absent(),
+    this.lastVisit = const Value.absent(),
+    this.syncStatus = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CustomersCompanion.insert({
+    required String id,
+    required String restaurantId,
+    required String name,
+    this.email = const Value.absent(),
+    this.phone = const Value.absent(),
+    this.totalSpent = const Value.absent(),
+    this.totalOrders = const Value.absent(),
+    this.loyaltyPoints = const Value.absent(),
+    this.lastVisit = const Value.absent(),
+    this.syncStatus = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       restaurantId = Value(restaurantId),
+       name = Value(name);
+  static Insertable<Customer> custom({
+    Expression<String>? id,
+    Expression<String>? restaurantId,
+    Expression<String>? name,
+    Expression<String>? email,
+    Expression<String>? phone,
+    Expression<double>? totalSpent,
+    Expression<int>? totalOrders,
+    Expression<int>? loyaltyPoints,
+    Expression<DateTime>? lastVisit,
+    Expression<int>? syncStatus,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (restaurantId != null) 'restaurant_id': restaurantId,
+      if (name != null) 'name': name,
+      if (email != null) 'email': email,
+      if (phone != null) 'phone': phone,
+      if (totalSpent != null) 'total_spent': totalSpent,
+      if (totalOrders != null) 'total_orders': totalOrders,
+      if (loyaltyPoints != null) 'loyalty_points': loyaltyPoints,
+      if (lastVisit != null) 'last_visit': lastVisit,
+      if (syncStatus != null) 'sync_status': syncStatus,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CustomersCompanion copyWith({
+    Value<String>? id,
+    Value<String>? restaurantId,
+    Value<String>? name,
+    Value<String?>? email,
+    Value<String?>? phone,
+    Value<double>? totalSpent,
+    Value<int>? totalOrders,
+    Value<int>? loyaltyPoints,
+    Value<DateTime?>? lastVisit,
+    Value<int>? syncStatus,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
+    return CustomersCompanion(
+      id: id ?? this.id,
+      restaurantId: restaurantId ?? this.restaurantId,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      totalSpent: totalSpent ?? this.totalSpent,
+      totalOrders: totalOrders ?? this.totalOrders,
+      loyaltyPoints: loyaltyPoints ?? this.loyaltyPoints,
+      lastVisit: lastVisit ?? this.lastVisit,
+      syncStatus: syncStatus ?? this.syncStatus,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (restaurantId.present) {
+      map['restaurant_id'] = Variable<String>(restaurantId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (email.present) {
+      map['email'] = Variable<String>(email.value);
+    }
+    if (phone.present) {
+      map['phone'] = Variable<String>(phone.value);
+    }
+    if (totalSpent.present) {
+      map['total_spent'] = Variable<double>(totalSpent.value);
+    }
+    if (totalOrders.present) {
+      map['total_orders'] = Variable<int>(totalOrders.value);
+    }
+    if (loyaltyPoints.present) {
+      map['loyalty_points'] = Variable<int>(loyaltyPoints.value);
+    }
+    if (lastVisit.present) {
+      map['last_visit'] = Variable<DateTime>(lastVisit.value);
+    }
+    if (syncStatus.present) {
+      map['sync_status'] = Variable<int>(syncStatus.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CustomersCompanion(')
+          ..write('id: $id, ')
+          ..write('restaurantId: $restaurantId, ')
+          ..write('name: $name, ')
+          ..write('email: $email, ')
+          ..write('phone: $phone, ')
+          ..write('totalSpent: $totalSpent, ')
+          ..write('totalOrders: $totalOrders, ')
+          ..write('loyaltyPoints: $loyaltyPoints, ')
+          ..write('lastVisit: $lastVisit, ')
+          ..write('syncStatus: $syncStatus, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $SyncQueueTable extends SyncQueue
     with TableInfo<$SyncQueueTable, SyncQueueData> {
   @override
@@ -6379,6 +7087,7 @@ abstract class _$RestaurantDatabase extends GeneratedDatabase {
   );
   late final $OrdersTable orders = $OrdersTable(this);
   late final $OrderItemsTable orderItems = $OrderItemsTable(this);
+  late final $CustomersTable customers = $CustomersTable(this);
   late final $SyncQueueTable syncQueue = $SyncQueueTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
@@ -6394,6 +7103,7 @@ abstract class _$RestaurantDatabase extends GeneratedDatabase {
     restaurantTables,
     orders,
     orderItems,
+    customers,
     syncQueue,
   ];
 }
@@ -9280,6 +9990,349 @@ typedef $$OrderItemsTableProcessedTableManager =
       OrderItem,
       PrefetchHooks Function()
     >;
+typedef $$CustomersTableCreateCompanionBuilder =
+    CustomersCompanion Function({
+      required String id,
+      required String restaurantId,
+      required String name,
+      Value<String?> email,
+      Value<String?> phone,
+      Value<double> totalSpent,
+      Value<int> totalOrders,
+      Value<int> loyaltyPoints,
+      Value<DateTime?> lastVisit,
+      Value<int> syncStatus,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
+typedef $$CustomersTableUpdateCompanionBuilder =
+    CustomersCompanion Function({
+      Value<String> id,
+      Value<String> restaurantId,
+      Value<String> name,
+      Value<String?> email,
+      Value<String?> phone,
+      Value<double> totalSpent,
+      Value<int> totalOrders,
+      Value<int> loyaltyPoints,
+      Value<DateTime?> lastVisit,
+      Value<int> syncStatus,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
+
+class $$CustomersTableFilterComposer
+    extends Composer<_$RestaurantDatabase, $CustomersTable> {
+  $$CustomersTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get restaurantId => $composableBuilder(
+    column: $table.restaurantId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get email => $composableBuilder(
+    column: $table.email,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get phone => $composableBuilder(
+    column: $table.phone,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get totalSpent => $composableBuilder(
+    column: $table.totalSpent,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get totalOrders => $composableBuilder(
+    column: $table.totalOrders,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get loyaltyPoints => $composableBuilder(
+    column: $table.loyaltyPoints,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get lastVisit => $composableBuilder(
+    column: $table.lastVisit,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$CustomersTableOrderingComposer
+    extends Composer<_$RestaurantDatabase, $CustomersTable> {
+  $$CustomersTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get restaurantId => $composableBuilder(
+    column: $table.restaurantId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get email => $composableBuilder(
+    column: $table.email,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get phone => $composableBuilder(
+    column: $table.phone,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get totalSpent => $composableBuilder(
+    column: $table.totalSpent,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get totalOrders => $composableBuilder(
+    column: $table.totalOrders,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get loyaltyPoints => $composableBuilder(
+    column: $table.loyaltyPoints,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get lastVisit => $composableBuilder(
+    column: $table.lastVisit,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$CustomersTableAnnotationComposer
+    extends Composer<_$RestaurantDatabase, $CustomersTable> {
+  $$CustomersTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get restaurantId => $composableBuilder(
+    column: $table.restaurantId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get email =>
+      $composableBuilder(column: $table.email, builder: (column) => column);
+
+  GeneratedColumn<String> get phone =>
+      $composableBuilder(column: $table.phone, builder: (column) => column);
+
+  GeneratedColumn<double> get totalSpent => $composableBuilder(
+    column: $table.totalSpent,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get totalOrders => $composableBuilder(
+    column: $table.totalOrders,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get loyaltyPoints => $composableBuilder(
+    column: $table.loyaltyPoints,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get lastVisit =>
+      $composableBuilder(column: $table.lastVisit, builder: (column) => column);
+
+  GeneratedColumn<int> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$CustomersTableTableManager
+    extends
+        RootTableManager<
+          _$RestaurantDatabase,
+          $CustomersTable,
+          Customer,
+          $$CustomersTableFilterComposer,
+          $$CustomersTableOrderingComposer,
+          $$CustomersTableAnnotationComposer,
+          $$CustomersTableCreateCompanionBuilder,
+          $$CustomersTableUpdateCompanionBuilder,
+          (
+            Customer,
+            BaseReferences<_$RestaurantDatabase, $CustomersTable, Customer>,
+          ),
+          Customer,
+          PrefetchHooks Function()
+        > {
+  $$CustomersTableTableManager(_$RestaurantDatabase db, $CustomersTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CustomersTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CustomersTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CustomersTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> restaurantId = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String?> email = const Value.absent(),
+                Value<String?> phone = const Value.absent(),
+                Value<double> totalSpent = const Value.absent(),
+                Value<int> totalOrders = const Value.absent(),
+                Value<int> loyaltyPoints = const Value.absent(),
+                Value<DateTime?> lastVisit = const Value.absent(),
+                Value<int> syncStatus = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CustomersCompanion(
+                id: id,
+                restaurantId: restaurantId,
+                name: name,
+                email: email,
+                phone: phone,
+                totalSpent: totalSpent,
+                totalOrders: totalOrders,
+                loyaltyPoints: loyaltyPoints,
+                lastVisit: lastVisit,
+                syncStatus: syncStatus,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String restaurantId,
+                required String name,
+                Value<String?> email = const Value.absent(),
+                Value<String?> phone = const Value.absent(),
+                Value<double> totalSpent = const Value.absent(),
+                Value<int> totalOrders = const Value.absent(),
+                Value<int> loyaltyPoints = const Value.absent(),
+                Value<DateTime?> lastVisit = const Value.absent(),
+                Value<int> syncStatus = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CustomersCompanion.insert(
+                id: id,
+                restaurantId: restaurantId,
+                name: name,
+                email: email,
+                phone: phone,
+                totalSpent: totalSpent,
+                totalOrders: totalOrders,
+                loyaltyPoints: loyaltyPoints,
+                lastVisit: lastVisit,
+                syncStatus: syncStatus,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$CustomersTableProcessedTableManager =
+    ProcessedTableManager<
+      _$RestaurantDatabase,
+      $CustomersTable,
+      Customer,
+      $$CustomersTableFilterComposer,
+      $$CustomersTableOrderingComposer,
+      $$CustomersTableAnnotationComposer,
+      $$CustomersTableCreateCompanionBuilder,
+      $$CustomersTableUpdateCompanionBuilder,
+      (
+        Customer,
+        BaseReferences<_$RestaurantDatabase, $CustomersTable, Customer>,
+      ),
+      Customer,
+      PrefetchHooks Function()
+    >;
 typedef $$SyncQueueTableCreateCompanionBuilder =
     SyncQueueCompanion Function({
       required String id,
@@ -9590,6 +10643,8 @@ class $RestaurantDatabaseManager {
       $$OrdersTableTableManager(_db, _db.orders);
   $$OrderItemsTableTableManager get orderItems =>
       $$OrderItemsTableTableManager(_db, _db.orderItems);
+  $$CustomersTableTableManager get customers =>
+      $$CustomersTableTableManager(_db, _db.customers);
   $$SyncQueueTableTableManager get syncQueue =>
       $$SyncQueueTableTableManager(_db, _db.syncQueue);
 }

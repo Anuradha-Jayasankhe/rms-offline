@@ -167,6 +167,25 @@ class OrderItems extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+/// Restaurant customers / guest profiles
+class Customers extends Table {
+  TextColumn get id => text()();
+  TextColumn get restaurantId => text()();
+  TextColumn get name => text()();
+  TextColumn get email => text().nullable()();
+  TextColumn get phone => text().nullable()();
+  RealColumn get totalSpent => real().withDefault(const Constant(0.0))();
+  IntColumn get totalOrders => integer().withDefault(const Constant(0))();
+  IntColumn get loyaltyPoints => integer().withDefault(const Constant(0))();
+  DateTimeColumn get lastVisit => dateTime().nullable()();
+  IntColumn get syncStatus => integer().withDefault(const Constant(1))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 /// Sync queue - operations waiting to sync to server
 class SyncQueue extends Table {
   TextColumn get id => text()();
